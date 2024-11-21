@@ -74,6 +74,7 @@ const ElBody = styled.div`
   justify-content:center;
   align-items:center;
   color:rgba(116, 83, 83, 1);
+  font-weight:700;
 
   &:hover{
     background-color:rgba(247, 228, 143, .7);

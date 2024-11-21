@@ -20,7 +20,6 @@ const Chat = () => {
 export default Chat;
 
 const ChatBody = styled.div`
-  
 `
 
 

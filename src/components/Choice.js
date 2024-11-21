@@ -1,14 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 const Choice = () => {
+  const [itemNum, setItemNum] = useState([]);
+  const [bottomStyle, setBottomStyle] = useState("-130px")
+  
+
+  const itemAdd = () => {
+    console.log(itemNum)
+    const newItem = `Item ${itemNum.length + 1}`;
+    setItemNum([...itemNum, newItem]);
+    
+  }
+
+  useEffect(() => {
+    switch (itemNum.length) {
+      case 1:
+        setBottomStyle((prev) => prev+50);
+        break;
+      case 2:
+        setBottomStyle((prev) => prev+50);
+        break;
+      case 3:
+        setBottomStyle((prev) => prev+50);
+        break;
+      default:
+        setBottomStyle("-130px"); // 기본 스타일로 되돌려놓기
+        break;
+    }
+  }, [itemNum.length]);
+
+  
+
   return (
     <ChoiceBody>
-      <ItemChoiceBody>
+      <ItemChoiceBody style={{bottom:{bottomStyle}}}>
         <ItemContents></ItemContents>
         <VsText>VS</VsText>
         <ItemContents></ItemContents>
-        <ItemPlusButton>+</ItemPlusButton>
+        {itemNum.map((item) => {
+          return(
+            <>
+              <VsText>VS</VsText>
+              <ItemContents></ItemContents>
+            </>
+          )
+        })}
+        <ItemPlusButton onClick={() => itemAdd()}>+</ItemPlusButton>
       </ItemChoiceBody>
       <OptionBody>
         <OptionInput placeholder='변수를 입력해주세요'>
@@ -28,14 +66,20 @@ const Choice = () => {
 export default Choice
 
 const ChoiceBody = styled.div`
-
+  position:relative;
 `
 
 const ItemChoiceBody = styled.div`
   display:flex;
   gap:10px;
+  width:360px;
   align-items:center;
   justify-content:center;
+  flex-wrap:wrap;
+  position:absolute;
+  
+  bottom:-120px;
+
 `
 
 const ItemContents = styled.input`
@@ -43,9 +87,14 @@ const ItemContents = styled.input`
   width:105px;
   height:50px;
   border:none;
-  padding:10px;
+  padding:15px;
   box-sizing:border-box;
   background-color:#FBE1CF;
+  font-weight:800;
+  font-size:16px;
+
+  
+  color:#5A5A5A;
 
   &:focus{
     outline:none;
@@ -73,7 +122,9 @@ const OptionBody = styled.div`
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-top:20px;
+  position:absolute;
+  bottom:-210px;
+  left: 20px;
   margin-bottom:30px;
   gap:10px;
 `
@@ -86,6 +137,7 @@ const OptionInput = styled.input`
   height:20px;
   padding:20px;
   box-sizing:border-box;
+  font-weight:700;
 
   &:focus{
     outline:none;

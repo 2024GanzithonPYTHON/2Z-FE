@@ -24,7 +24,7 @@ export default ChatContents
 const ChatContentsBody = styled.div`
   width:90%;
   margin:auto;
-  min-height:600px;
+  min-height:500px;
 `
 
 const BaraProfile = styled.div`

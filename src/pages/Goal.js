@@ -62,7 +62,7 @@ const IntroBody = styled.div`
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-top:50px;
+  margin-top:20px;
   
 `
 
@@ -125,6 +125,7 @@ const UpdateButton = styled.button`
   top:-140px;
   font-weight:900;
   font-size:20px;
+  color:#333;
 `
 
 const ToggleBody = styled.div`
@@ -134,13 +135,14 @@ const ToggleBody = styled.div`
 `
 
 const GoalListBody = styled.div`
-  height:500px;
+  height:400px;
   overflow:scroll;
   background:#f4f4f4;
   border-radius:45px;
   position:relative;
   top:-60px;
   padding:30px;
+  box-sizing:border-box;
 `
 
 const SaveButton = styled.button`
@@ -154,4 +156,7 @@ const SaveButton = styled.button`
   top:-20px;
   font-weight:900;
   font-size:20px;
+  z-index:2;
+  color:#333;
+
 `

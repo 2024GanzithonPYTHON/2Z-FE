@@ -23,10 +23,11 @@ const SpeechBubbleContents = styled.div`
   font-size:14px;
   margin-left:40px;
   padding:10px 20px;
-  font-weight:500;
+  font-weight:600;
   margin-bottom:15px;
   box-sizing:border-box;
   text-align:start;
+  color:#333;
 `
 
 const HeartIcon = styled.img`

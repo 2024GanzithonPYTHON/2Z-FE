@@ -69,7 +69,7 @@ const SmallButton = styled.button`
 `
 
 const DottedLine = styled.div`
-  margin-top:30px;
+  margin-top:15px;
   font-weight:800;
   font-size:30px;
   color:#CED3DE;

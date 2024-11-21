@@ -2,6 +2,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 import TabBar from '../components/TabBar'
 import banner_img from '../assets/banner_img.png'
+import { Link } from 'react-router-dom'
 
 const Main = () => {
   return (
@@ -10,9 +11,13 @@ const Main = () => {
         <BannerImg src={banner_img}/>
       </BannerBody>
       <MainContentsBody>
-        <MainTitle>당신의 결정,<br/> 물어바라가 도와줄게요</MainTitle>
+        <MainTitle>당신의 결정,<br/>
+        <div style={{display:'flex', justifyContent:'center'}}><div style={{color:"rgba(204, 179, 157, 1)"}}>물어바라</div> 가 도와줄게요</div>
+        </MainTitle>
         <MainText>?_?</MainText>
-        <GotoChat>결정하러 가기</GotoChat>
+        <Link to='/chat'>
+          <GotoChat>결정하러 가기</GotoChat>
+        </Link>
       </MainContentsBody>
       <TabBar/>
     </MainBody>
@@ -26,6 +31,7 @@ const MainBody = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  color:#4c4c4c;
 `
 
 const BannerBody = styled.div`
@@ -41,8 +47,8 @@ const BannerBody = styled.div`
 `
 
 const BannerImg = styled.img`
-  width:490px;
-  height:250px;
+  width:470px;
+  height:300px;
 `
 
 const MainContentsBody = styled.div`

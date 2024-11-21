@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { styled } from 'styled-components';
 import TestContents from '../components/TestContents';
-
+import { Link } from 'react-router-dom';
+import back_arrow from '../assets/arrow_back.png'
 
 const Test = () => {
   const [next, setNext] = useState(false);
@@ -11,14 +12,25 @@ const Test = () => {
   return (
     
     <TestBody>
-      <TestTitle>성향 테스트</TestTitle>
+      <TestHeader>
+        { next ?
+        <TestBackButton onClick={() => {setNext(false)}}>
+          <img src={back_arrow} style={{width:'25px', height:'25px'}}/>
+        </TestBackButton>
+        :
+        <></>
+        }
+        <TestTitle>성향 테스트</TestTitle>
+      </TestHeader>
       {
       next ? 
       <>
         {title_2.map((el) => {
           return(<TestContents title={el}></TestContents>)
         })}
-        <TestButton >제출하기</TestButton>
+        <Link to="/">
+          <TestButton>제출하기</TestButton>
+        </Link>
       
       </>
       :
@@ -46,19 +58,34 @@ const TestBody = styled.div`
   
 `
 
+const TestHeader = styled.div`
+  display:flex;
+  justify-content:center;
+
+`
+
 const TestTitle = styled.div`
   font-weight: 800;
   font-size:24px;
-  margin-top:40px;
+  margin-top:20px;
   margin-botton:50px;
 `
 
 const TestNextButton = styled.button`
   background:none;
   border:none;
-  
+  width:33px;
   margin:20px;
+  position:relative;
+  right:-150px;
+`
 
+const TestBackButton = styled.button`
+  border:none;
+  background:none;
+  position:absolute;
+  left:620px;
+  top:23px;
 `
 
 const TestButton = styled.button`
