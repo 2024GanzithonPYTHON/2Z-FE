@@ -15,8 +15,8 @@ function App() {
     <div className="App">
       {/* <Test/> */}
       {/* <Chat/> */}
-      {/* <Main/> */}
-      <Goal/>
+      <Main/>
+      {/* <Goal/> */}
     </div>
     </>
   );
