@@ -3,11 +3,23 @@ import { styled } from 'styled-components';
 import TestContents from '../components/TestContents';
 import { Link } from 'react-router-dom';
 import back_arrow from '../assets/arrow_back.png'
+import axios from 'axios';
 
 const Test = () => {
   const [next, setNext] = useState(false);
+  const [testResult, setTestResult] = useState([0, 1, 2, 3, 4, 5, 6]);
   const title_1 = ["새로운 사람을 만나는 것이 좋다", "결정을 내릴 때 빠르게 판단하는 편이다", "새로운 경험을 시도하는 것을 좋아한다", "편안함이 보장된 선택을 선호한다", ]
   const title_2 = ["여유로운 계획보다는 빠르게 움직이는 것을 선호한다", "다른 사람들과 함께하는 활동이 좋다", `어떠한 결정을 할 때 가격이 합리적인지먼저 고려하는 편이다`]
+
+  async function handleSubmit(){
+    try {
+      const response = await axios.post(``,{
+        
+      })
+    } catch (error) {
+      
+    }
+  }
 
   return (
     
