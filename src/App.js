@@ -3,9 +3,9 @@ import './App.css';
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import StartScreen from "./components/StartScreen";
-import SignUpScreen from "./components/SignUpScreen";
-import LoginScreen from "./components/LoginScreen";
+import StartScreen from "./pages/StartScreen";
+import SignUpScreen from "./pages/SignUpScreen";
+import LoginScreen from "./pages/LoginScreen";
 
 function App() {
   return (
