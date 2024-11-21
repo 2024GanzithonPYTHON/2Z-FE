@@ -22,7 +22,10 @@ const Main = () => {
 export default Main
 
 const MainBody = styled.div`
-
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 `
 
 const BannerBody = styled.div`
@@ -43,12 +46,13 @@ const BannerImg = styled.img`
 `
 
 const MainContentsBody = styled.div`
-  width:auto;
-  height:500px;
+  width:359px;
+  height:550px;
   border-radius: 77px;
   border: 1px solid #745353;
   background: #FFF;
   margin-top:50px;
+
 `
 
 const MainTitle = styled.p`

@@ -4,6 +4,7 @@ import ChatContents from '../components/ChatContents';
 import Choice from '../components/Choice';
 import back_arrow from '../assets/arrow_back.png'
 import Header from '../components/Header';
+import TabBar from '../components/TabBar';
 
 const Chat = () => {
   return (
@@ -11,6 +12,7 @@ const Chat = () => {
       <Header/>
       <ChatContents></ChatContents>
       <Choice/>
+      <TabBar/>
     </ChatBody>
   )
 }
