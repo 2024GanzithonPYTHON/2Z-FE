@@ -1,0 +1,79 @@
+/* 전체 화면 중앙 정렬 */
+.signup-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #fff;
+  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* 헤더 스타일 */
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.back-arrow {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+
+.header-title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 회원가입 폼 */
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 14px;
+  color: #555;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #f9a1a1;
+}
+
+/* 완료 버튼 */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: #F7C7A7;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #f08484;
+}
