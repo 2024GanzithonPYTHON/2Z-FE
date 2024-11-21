@@ -11,6 +11,11 @@ import { Helmet } from 'react-helmet';
 import Main from './pages/Main';
 import Goal from './pages/goal';
 import MyPage from "./pages/MyPage";
+import Test from './pages/Test';
+import Chat from './pages/Chat';
+import { Helmet } from 'react-helmet';
+import Main from './pages/Main';
+import Goal from './pages/goal';
 
 function App() {
   return (
