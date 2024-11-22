@@ -1,12 +1,34 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import heart_icon from '../assets/heart_icon.png'
+import empty_heart from '../assets/empty_heart.png'
+import axios from '../api/baseURL'
 
-const SpeechBubble = ({text, isHeart}) => {
+const SpeechBubble = ({text, isHeart, setIsHeart}) => {
+  
+  async function handleHeartClick(){
+    try {
+      const response = axios.post("/hearts/save",{
+        "nickname":"",
+        "chat_id":"",
+        "answer":"",
+        "choices":[]
+      },{
+        headers:{
+  
+        }
+      })
+      setIsHeart(prev => !prev)
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+
   return (
     <>
       <SpeechBubbleContents>{text}
-      {isHeart ? <HeartIcon src={heart_icon}/> : <></>}
+      {isHeart ? <HeartIcon src={heart_icon} onClick={handleHeartClick}/> : <><EmptyHeartIcon src={empty_heart} onClick={handleHeartClick}/></>}
       </SpeechBubbleContents>
       
     </>
@@ -28,12 +50,21 @@ const SpeechBubbleContents = styled.div`
   box-sizing:border-box;
   text-align:start;
   color:#333;
+  position:relative;
 `
 
 const HeartIcon = styled.img`
   width:18px;
   height:18px;
-  position:relative;
-  top:-18px;
-  left:7px;
+  position:absolute;
+  top:10px;
+  right:15px;
+`
+
+const EmptyHeartIcon = styled.img`
+  width:21px;
+  height:22px;
+  position:absolute;
+  top:10px;
+  right:12px;
 `

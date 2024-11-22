@@ -32,39 +32,49 @@ const MainBody = styled.div`
   justify-content:center;
   align-items:center;
   color:#4c4c4c;
+  max-width:393px;
+  overflow:hidden;
 `
 
 const BannerBody = styled.div`
-  width:auto;
+  width:450px;
   height:227px;
   background:rgba(247, 228, 143, 1);
-  margin-top:50px;
+  margin-top:20px;
   border-radius:20px;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  text-align:center;
+  
 `
 
 const BannerImg = styled.img`
-  width:470px;
+  width:450px;
   height:300px;
 `
 
 const MainContentsBody = styled.div`
-  width:359px;
-  height:550px;
+  width:393px;
+  height:750px;
   border-radius: 77px;
   border: 1px solid #745353;
   background: #FFF;
   margin-top:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 
 `
 
 const MainTitle = styled.p`
-  margin-top:80px;
+  margin-top:-200px;
   font-size:30px;
   font-weight:800;
+
 `
 
 const MainText = styled.p`

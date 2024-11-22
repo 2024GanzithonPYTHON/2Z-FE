@@ -20,12 +20,17 @@ export default Header
 
 const HeaderBody = styled.div`
   display:flex;
-  justify-content:center;
+  justify:content:center;
   align-items:center;
+  width:393px;
+  position:relative;
+  top:0;
+  gap:120px;
 `
 
 const HeaderTitle = styled.p`
-  flex-grow:1;
+  // position:absolute;
+  right:20px;
   font-weight:800;
   font-size:20px;
 `
@@ -35,4 +40,5 @@ const BackButton = styled.button`
   height:28px;
   border:none;
   background:none;
+  margin-left:10px;
 `

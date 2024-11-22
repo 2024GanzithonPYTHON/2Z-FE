@@ -5,10 +5,32 @@ import character_img from '../assets/character.png'
 import TabBar from '../components/TabBar';
 import { Toggle } from '../components/ToggleButton';
 import GoalEl from '../components/GoalEl';
+import axios from '../api/baseURL';
 
 const Goal = () => {
-  const [isUpdate, setIsUpdate] = useState(false)
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [goalValue, setGoalValue] = useState([]);
+  const [updatedGoalValue, setUpdatedGoalValue] = useState([]);
   const category = ["건강 / 식습관", "생활패턴 / 라이프스타일", "환경 보호", "자기 관리 / 개발목표", "시간 관리", "예산 / 재정 관리" , "관계 / 사회적", "취미 / 여가"]
+
+  async function handleGoalSubmit(){
+    try {
+      setIsUpdate(false);
+      const response = await axios.post('/goals/update',{
+        "userId":"",
+        "goals": goalValue
+      },{
+        headers:{
+          Authorization:""
+        }
+      })
+      console.log(response)
+      const data = response
+      setUpdatedGoalValue(data)
+    } catch (error) {
+      console.log(error)
+    }
+  } 
 
   return (
     <GoalBody>
@@ -29,7 +51,7 @@ const Goal = () => {
           })}
         </div>
       </GoalListBody>
-      <SaveButton onClick={() => setIsUpdate(false)}>저장하기</SaveButton>
+      <SaveButton onClick={handleGoalSubmit}>저장하기</SaveButton>
       </>
       :
       <>
@@ -41,7 +63,13 @@ const Goal = () => {
         <ToggleBody>
           <Toggle/>
         </ToggleBody>
-        
+        <div style={{overflowY:"scroll", overflowX:"hidden", marginTop:"-130px", marginLeft:"20px"}}>
+          {category.map((el, index) => {
+            return(
+            <GoalEl title={el} index={index} updatedGoalValue={["비건", "페스코", "독서 목표"]}></GoalEl>
+            )
+          })}
+        </div>
       </MyGoalBody>
       <UpdateButton onClick={() => setIsUpdate(true)}>수정하기</UpdateButton>
       </>
@@ -55,7 +83,8 @@ const Goal = () => {
 export default Goal;
 
 const GoalBody = styled.div`
-
+  width:393px;
+  
 `
 
 const IntroBody = styled.div`
@@ -80,7 +109,7 @@ justify-content:center;
 align-items:center;
 font-weight:700;
 top:-30px;
-left:20px;
+left:25px;
 
 /* 말풍선 꼬리 */
 &::after {
@@ -105,12 +134,18 @@ const CharacterImg = styled.img`
 `
 
 const MyGoalBody = styled.div`
-  width:95%;
+  width:90%;
   height:400px;
   background:#f4f4f4;
   border-radius:45px;
   position:relative;
-  top:-185px;
+  top:-55px;
+  padding:20px;
+  box-sizing:border-box;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  margin:auto;
+  
 `
 
 
@@ -120,17 +155,20 @@ const UpdateButton = styled.button`
   border:none;
   border-radius:30px;
   background-color:rgba(247, 228, 143, .7);
-  margin:-25px 0;
+  display:block;
+  margin:auto;
   position:relative;
-  top:-140px;
+  top:-20px;
+
   font-weight:900;
   font-size:20px;
   color:#333;
+  
 `
 
 const ToggleBody = styled.div`
   position:relative;
-  top:20px;
+  top:-120px;
   left:100px;
 `
 
@@ -143,6 +181,8 @@ const GoalListBody = styled.div`
   top:-60px;
   padding:30px;
   box-sizing:border-box;
+  margin:auto;
+  width:90%;
 `
 
 const SaveButton = styled.button`
@@ -151,12 +191,13 @@ const SaveButton = styled.button`
   border:none;
   border-radius:30px;
   background-color:rgba(247, 228, 143, .7);
-  margin:-25px 0;
+  // margin:-25px 0;
   position:relative;
   top:-20px;
   font-weight:900;
   font-size:20px;
   z-index:2;
   color:#333;
-
+  margin: auto;
+  display:block;
 `

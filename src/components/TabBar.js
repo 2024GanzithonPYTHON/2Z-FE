@@ -22,14 +22,16 @@ const TabBar = () => {
 export default TabBar
 
 const TabBarBody = styled.div`
-  width:360px;
+  width:393px;
   height:60px;
-  position:absolute;
-  background:white;
+  position:fixed;
+  background:#fff;
   bottom:0;
   display:flex;
   gap:95px;
   justify-content:center;
   align-items:center;
-  margin-bottom:20px;
+  // margin-bottom:20px;
+  padding:20px 0;
+  box-sizing:border-box;
 `

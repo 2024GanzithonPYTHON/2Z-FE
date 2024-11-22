@@ -1,20 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components';
 
-const TestContents = ({title}) => {
+const TestContents = ({title, testValue, setTestValue, index, setTestResult, testResult}) => {
+  const [selectedButton, setSelectedButton] = useState(0);
+
+  const handleClick = (index, value) => {
+   
+    const title_list = ["extroversion", "decision", "risk", "comfort","time", "social", "budget"]
+    const title = title_list[index]
+    console.log(value);
+
+    setTestResult((prevResult) => ({
+      ...prevResult,
+      [title]: value,// 선택된 항목 업데이트
+    }));
+    setSelectedButton(value)
+  };
+
   return (
     <TestContentsBody>
       <ContentsTitle>{title}</ContentsTitle>
       <div style={{display:'flex', justifyContent:'center'}}>
         <Yes>그렇다</Yes>
-        <BigButton></BigButton>
-        <SmallButton></SmallButton>
-        <SmallButton/>
-        <BigButton/>
+
+        <BigButton onClick={() => {handleClick(index,100)}} style={{backgroundColor:selectedButton===100 ? "#f7c7a7" : "#efefef"}}></BigButton>
+        <SmallButton onClick={() => {handleClick(index,75)}} style={{backgroundColor:selectedButton===75 ? "#f7c7a7" : "#efefef"}}></SmallButton>
+        <SmallButton onClick={() => {handleClick(index,50)}} style={{backgroundColor:selectedButton===50 ? "#f7c7a7" : "#efefef"}}/>
+        <BigButton onClick={() => {handleClick(index,25)}} style={{backgroundColor:selectedButton===25 ? "#f7c7a7" : "#efefef"}}/>
         <No>아니다</No>
       </div>
       <DottedLine>
-        - - - - - - - - - - - - - - - - - -
+        - - - - - - - - - - - - - - - - - - - 
       </DottedLine>
     </TestContentsBody>
   )
@@ -26,13 +42,16 @@ const TestContentsBody = styled.div`
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:center:center;
+  align-items:center;
+  word-break:keep-all;
 `
 
 const ContentsTitle = styled.p`
   font-weight:600;
   font-size:17px;
   padding:20px 0;
+  width:300px;
+  text-align:center;
 `
 
 const Yes = styled.div`
@@ -53,6 +72,9 @@ const BigButton = styled.button`
   border:none;
   margin-left:26px;
   &:hover{
+    background:#f7c7a7;
+  }
+  &:focus{
     background:#f7c7a7;
   }
 `

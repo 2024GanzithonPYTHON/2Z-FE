@@ -3,20 +3,36 @@ import { styled } from 'styled-components';
 import TestContents from '../components/TestContents';
 import { Link } from 'react-router-dom';
 import back_arrow from '../assets/arrow_back.png'
-import axios from 'axios';
+import axios from '../api/baseURL'
 
 const Test = () => {
   const [next, setNext] = useState(false);
-  const [testResult, setTestResult] = useState([0, 1, 2, 3, 4, 5, 6]);
+  const [testResult, setTestResult] = useState({
+    "extroversion": null,
+    "decision": null,
+    "risk": null,
+    "comfort": null,
+    "time": null,
+    "social": null,
+    "budget": null,
+    });
+  const [testValue, setTestValue] = useState("");
   const title_1 = ["새로운 사람을 만나는 것이 좋다", "결정을 내릴 때 빠르게 판단하는 편이다", "새로운 경험을 시도하는 것을 좋아한다", "편안함이 보장된 선택을 선호한다", ]
-  const title_2 = ["여유로운 계획보다는 빠르게 움직이는 것을 선호한다", "다른 사람들과 함께하는 활동이 좋다", `어떠한 결정을 할 때 가격이 합리적인지먼저 고려하는 편이다`]
+  const title_2 = ["여유로운 계획보다는 빠르게 움직이는 것을 선호한다", "다른 사람들과 함께하는 활동이 좋다", `어떠한 결정을 할 때 가격이 합리적인지 먼저 고려하는 편이다`]
 
   async function handleSubmit(){
     try {
-      const response = await axios.post(``,{
-        
+      const response = await axios.post("/tests/initial",{
+        "user-id":12345,
+        "testResults":testResult
+      }, {
+        headers:{
+          Authorization:""
+        }
       })
+      console.log(response)
     } catch (error) {
+      console.log(error)
       
     }
   }
@@ -37,24 +53,28 @@ const Test = () => {
       {
       next ? 
       <>
-        {title_2.map((el) => {
-          return(<TestContents title={el}></TestContents>)
+        {title_2.map((el, index) => {
+          return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index+4} setTestResult={setTestResult} testResult={testResult}></TestContents>)
         })}
         <Link to="/">
-          <TestButton>제출하기</TestButton>
+          <TestButton onClick={handleSubmit}>제출하기</TestButton>
         </Link>
       
       </>
       :
       <>
-      {title_1.map((el) => {
-        return(<TestContents title={el}></TestContents>)
+      {title_1.map((el, index) => {
+        // setTestResult((prev) => prev[index] = testValue)
+        console.log(testValue);
+
+        return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index} setTestResult={setTestResult} testResult={testResult}></TestContents>)
       })}
       <TestNextButton onClick={() => {setNext(true)}}>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
         <span class="material-symbols-outlined">
           arrow_forward
         </span>
+        
       </TestNextButton>
       </>
       }
@@ -67,12 +87,19 @@ export default Test;
 
 
 const TestBody = styled.div`
-  
+  background-color:#fff;
+  word-break:break-all;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 `
 
 const TestHeader = styled.div`
   display:flex;
   justify-content:center;
+  width:393px;
+  position:relative;
 
 `
 
@@ -96,7 +123,7 @@ const TestBackButton = styled.button`
   border:none;
   background:none;
   position:absolute;
-  left:620px;
+  left:20px;
   top:23px;
 `
 
