@@ -10,6 +10,7 @@ import Chat from './pages/Chat';
 import { Helmet } from 'react-helmet';
 import Main from './pages/Main';
 import Goal from './pages/goal';
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<StartScreen />} />
         <Route path="/signup" element={<SignUpScreen />} />
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
       </BrowserRouter>
     </div>
