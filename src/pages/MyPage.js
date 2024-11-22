@@ -4,7 +4,6 @@ import axios from "axios";
 import mypageimg from "../assets/mypage.png";
 
 function MyPage() {
-  function MyPage() {
     const nickname = "닉네임"; // 사용자 닉네임 예시
     const chatId = 12345; // 예시 채팅 ID
     const answer = "추천 음식은 초코라떼입니다."; // 예시 AI 답변
@@ -82,5 +81,5 @@ function MyPage() {
     </div>
   );
 }
-}
+
 export default MyPage;
