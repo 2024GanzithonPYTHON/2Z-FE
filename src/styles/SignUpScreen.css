@@ -1,14 +1,13 @@
 /* 전체 화면 중앙 정렬 */
 .signup-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
+  width: 375px; /* 일반 모바일 화면 크기 */
+  height: 667px; /* 모바일 높이 */
+  margin: 0 auto; /* 중앙 정렬 */
   background-color: #fff;
-  font-family: "Arial", sans-serif;
-  box-sizing: border-box;
-  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 헤더 스타일 */
