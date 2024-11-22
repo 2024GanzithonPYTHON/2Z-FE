@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/SignUpScreen.css";
 import backArrow from "../assets/backarrow.png";
 
@@ -21,28 +22,22 @@ function SignUpScreen() {
     }
 
     try {
-      const response = await fetch("https://your-api-url.com/users/join", {
-        method: "POST",
+      const response = await axios.post("https://your-api-url.com/users/join", {
+        email,
+        nickname,
+        password,
+      }, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          nickname,
-          password,
-        }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData["error-message"] || "회원가입 실패");
-      }
-
-      const data = await response.json(); // 성공 데이터 처리
-      alert(`${data.nickname}님, 회원가입이 완료되었습니다!`);
+      const { message, nickname: registeredNickname } = response.data;
+      alert(`${registeredNickname}님, ${message}`);
       navigate("/login"); // 성공 시 로그인 화면으로 이동
     } catch (err) {
-      setError(err.message); // 에러 상태 업데이트
+      const errorMessage = err.response?.data?.["error-message"] || "회원가입 실패";
+      setError(errorMessage); // 에러 상태 업데이트
     }
   };
 

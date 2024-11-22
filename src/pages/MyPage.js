@@ -1,9 +1,44 @@
 import React from "react";
 import "../styles/MyPage.css";
+import axios from "axios";
 import mypageimg from "../assets/mypage.png";
 
 function MyPage() {
-  const nickname = "닉네임"; // 사용자 닉네임 예시
+  function MyPage() {
+    const nickname = "닉네임"; // 사용자 닉네임 예시
+    const chatId = 12345; // 예시 채팅 ID
+    const answer = "추천 음식은 초코라떼입니다."; // 예시 AI 답변
+    const choices = ["딸기라떼", "초코라떼"]; // 예시 선택지
+  
+    // 하트 보관함에 저장하는 함수
+    const saveToHeart = async () => {
+      const token = "your_jwt_token"; // JWT 토큰 설정
+  
+      const data = {
+        nickname: nickname,
+        chat_id: chatId,
+        answer: answer,
+        choices: choices,
+      };
+  
+      try {
+        const response = await axios.post(
+          "https://your-api-url.com/hearts/save",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("저장 성공:", response.data);
+        alert("하트 보관함에 저장되었습니다!");
+      } catch (error) {
+        console.error("저장 실패:", error.response?.data || error.message);
+        alert("저장 중 문제가 발생했습니다.");
+      }
+    };
 
   return (
     <div className="my-page">
@@ -47,5 +82,5 @@ function MyPage() {
     </div>
   );
 }
-
+}
 export default MyPage;
