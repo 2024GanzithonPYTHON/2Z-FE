@@ -7,15 +7,12 @@ import SignUpScreen from "./pages/SignUpScreen";
 import LoginScreen from "./pages/LoginScreen";
 import Test from './pages/Test';
 import Chat from './pages/Chat';
-import { Helmet } from 'react-helmet';
-import Main from './pages/Main';
-import Goal from './pages/goal';
-import MyPage from "./pages/MyPage";
-import Test from './pages/Test';
-import Chat from './pages/Chat';
-import { Helmet } from 'react-helmet';
+
 import Main from './pages/Main';
 import Goal from './pages/Goal';
+import MyPage from './pages/MyPage';
+
+
 
 function App() {
   

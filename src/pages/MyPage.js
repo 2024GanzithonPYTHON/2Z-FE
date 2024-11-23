@@ -19,7 +19,7 @@ function MyPage() {
       // 데이터 가져오기
       const fetchSlides = async () => {
         try {
-          const response = await axios.get("https://your-api-url.com/slides");
+          const response = await axios.get(`https://your-api-url.com/slides`);
           setSlides(response.data); // 받아온 데이터를 슬라이드 상태로 설정
           setLoading(false); // 로딩 완료
         } catch (err) {

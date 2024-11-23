@@ -30,7 +30,7 @@ function SignUpScreen() {
     console.log("전송할 JSON 데이터:", JSON.stringify(requestData)); // JSON 형식 출력
   
     try {
-      const response = await axios.post("http://49.50.163.226:8080/users/join", requestData, {
+      const response = await axios.post(`http://49.50.163.226:8080/users/join`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
