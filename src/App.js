@@ -23,9 +23,9 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/main' element={<Main/>}></Route>
-        <Route path='test' element={<Test/>}></Route>
-        <Route path='chat' element={<Chat/>}></Route>
-        <Route path='goal' element={<Goal/>}></Route>
+        <Route path='/test' element={<Test/>}></Route>
+        <Route path='/chat' element={<Chat/>}></Route>
+        <Route path='/goal' element={<Goal/>}></Route>
         <Route path="/" element={<StartScreen />} />
         <Route path="/signup" element={<SignUpScreen />} />
         <Route path="/login" element={<LoginScreen />} />

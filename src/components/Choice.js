@@ -25,23 +25,24 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse, isResponse,setIsR
   
   async function handleChatSubmit(){
     try {
-      const response = await axios.get(`http://49.50.163.226:8080/recommends/request`, {
-        "userId":1,
+      const response = await axios.post(`http://49.50.163.226:8080/recommends/request`, {
+        "userId":2,
         "setting":setting,
         "choices":choices,
         
-          // "userId": 1,
+          // "userId": 2,
           // "setting": "심심해",
-          // "choices": ["게임(리그오브레전드)하기", "책읽기", "유튜브보기"]
+          // "choices": ["게임(리그오브레전드)하기", "책읽기", "유튜브보기"],
       },{
         headers:{
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         }
       }
       )
       console.log(response)
-      // const data = JSON.stringify(response.data)
-      // setAiResponse(data);
+      const data = response.data
+      console.log(data);
+      setAiResponse(data);
       setIsResponse(true);
       console.log(isResponse);
     } catch (error) {
@@ -91,7 +92,7 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse, isResponse,setIsR
     {isResponse ? 
       <div style={{display:'flex', flexDirection:'column', position:"relative", bottom:"-90px"}}>
       <RetryButton>다른 답변보기</RetryButton>
-      <NewChoiceButton>새로운 선택</NewChoiceButton>
+      <NewChoiceButton >새로운 선택</NewChoiceButton>
       </div>
     :
     <ChoiceBody>

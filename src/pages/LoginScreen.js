@@ -27,11 +27,12 @@ function LoginScreen() {
         },
       });
 
-      const { message, nickname, userId } = response.data;
+      const { message, nickname, userId, testYN } = response.data;
       alert(`안녕하세요, ${nickname}님!`);
       setUserId(userId)
       console.log(response.data)
-      navigate("/main"); // 성공 시 대시보드로 이동
+      console.log(testYN);
+      testYN === "Y" ? navigate("/main") : navigate('/test'); // 성공 시 대시보드로 이동
  
     } catch (err) {
       const errorMessage = err.response?.data?.message || "로그인 실패";

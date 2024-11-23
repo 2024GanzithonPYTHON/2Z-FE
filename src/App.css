@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 .App{
   max-width: 393px;
@@ -9,6 +16,7 @@
   word-break: keep-all;
   position:relative;
   background-color: #fff;
+  font-family: 'Pretendard-Regular', sans-serif;
 }
 
 .app {
@@ -19,4 +27,5 @@ border: 1px solid #ddd; /* 디바이스 테두리처럼 보이게 */
 overflow: hidden; /* 넘치는 내용을 숨김 */
 /* background-color: #ffffff; 앱 같은 흰 배경 */
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+font-family: 'Pretendard-Regular', sans-serif;
 }
