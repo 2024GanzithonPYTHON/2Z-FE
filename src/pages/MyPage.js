@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/MyPage.css";
 import axios from "axios";
 import mypageimg from "../assets/mypage.png";
@@ -12,6 +13,7 @@ function MyPage() {
     const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 인덱스
     const [loading, setLoading] = useState(true); // 로딩 상태
     const [error, setError] = useState(null); // 에러 상태
+    const navigate = useNavigate();
 
     useEffect(() => {
       // 데이터 가져오기
@@ -123,8 +125,18 @@ function MyPage() {
           ))}
         </div>
       </div>
+      {/* StartScreen.js 페이지로 이동하는 버튼 */}
+      <div className="restart-section">
+        <button
+          className="restart-button"
+          onClick={() => navigate("/start-screen")}
+        >
+          성향테스트 다시 해보기
+        </button>
+      </div>
     </div>
   );
 }
 
 export default MyPage;
+
