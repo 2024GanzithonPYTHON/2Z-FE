@@ -10,20 +10,39 @@ const TestContents = ({title, testValue, setTestValue, index, setTestResult, tes
     const title = title_list[index]
     console.log(value);
 
-    // setTestResult((prevResult) => ({
-    //   ...prevResult,
-    //   [title]: value,// 선택된 항목 업데이트
-    // }));
-    setTestResult((prevResult) => {
-      const desiredOrder = ["extroversion", "decision", "risk", "comfort", "time", "social", "budget"];
-      const sortedResult = Object.keys(prevResult)
-        .sort((a, b) => desiredOrder.indexOf(a) - desiredOrder.indexOf(b))
-        .reduce((acc, key) => {
-          acc[key] = prevResult[key];
-          return acc;
-        }, {});
-      return sortedResult;
-    });
+    setTestResult((prevResult) => ({
+      ...prevResult,
+      [title]: value,// 선택된 항목 업데이트
+    }))
+    // setTestResult((prevResult) => {
+    //   const desiredOrder = ["extroversion", "decision", "risk", "comfort", "time", "social", "budget"];
+    //   const sortedResult = Object.keys(prevResult)
+    //     .sort((a, b) => desiredOrder.indexOf(a) - desiredOrder.indexOf(b))
+    //     .reduce((acc, key) => {
+    //       acc[key] = prevResult[key];
+    //       return acc;
+    //     }, {});
+    //   return sortedResult;
+    // });
+
+    // setTestResult((prevResult) => {
+    //   const desiredOrder = ["extroversion", "decision", "risk", "comfort", "time", "social", "budget"];
+    
+    //   // prevResult가 객체 형태인 경우에만 진행
+    //   if (prevResult && typeof prevResult === 'object') {
+    //     const sortedResult = Object.keys(prevResult)
+    //       .sort((a, b) => desiredOrder.indexOf(a) - desiredOrder.indexOf(b))
+    //       .reduce((acc, key) => {
+    //         acc[key] = prevResult[key];
+    //         return acc;
+    //       }, {});
+    
+    //     return sortedResult;
+    //   }
+    
+    //   return prevResult; // prevResult가 객체가 아닌 경우 그대로 반환
+    // });
+    
     
     setSelectedButton(value)
   };

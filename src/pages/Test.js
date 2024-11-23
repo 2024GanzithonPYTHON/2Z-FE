@@ -3,10 +3,13 @@ import { styled } from 'styled-components';
 import TestContents from '../components/TestContents';
 import { Link } from 'react-router-dom';
 import back_arrow from '../assets/arrow_back.png'
-import axios from '../api/baseURL'
+
+import useUserStore from '../store/user';
+import axios from 'axios';
 
 const Test = () => {
   const [next, setNext] = useState(false);
+  const userId = useUserStore((state) => state.userId);
   const [testResult, setTestResult] = useState({
     "extroversion": null,
     "decision": null,
@@ -22,17 +25,20 @@ const Test = () => {
 
   async function handleSubmit(){
     try {
-      const response = await axios.post("/tests/initial",{
-        "user-id":12345,
+      const response = await axios.post("http://49.50.163.226:8080/tests/initial",{
+        "userId":userId,
         "testResults":testResult
+        
       }, {
         headers:{
-          Authorization:""
+          "Content-Type": "application/json"
         }
       })
       console.log(response)
+    
     } catch (error) {
       console.log(testResult)
+      console.log(userId)
       
     }
   }

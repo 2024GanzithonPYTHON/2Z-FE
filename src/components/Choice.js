@@ -1,47 +1,52 @@
-import axios from '../api/baseURL';
+
 import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
+import useUserStore from '../store/user';
+import axios from 'axios';
 
-const Choice = ({myChat, setMyChat, aiResponse, setAiResponse, isResponse,setIsResponse}) => {
+const Choice = ({myChat, setMyChat, aiResponse, setAiResponse, isResponse,setIsResponse, choices, setChoices, setting, setSetting, setGptAnswer}) => {
   const [itemNum, setItemNum] = useState([]);
   const [bottomStyle, setBottomStyle] = useState("-130px")
-  const [choices, setChoices] = useState([]);
+  
   const [choice1, setChoice1] = useState("");
   const [choice2, setChoice2] = useState("");
   const [choice3, setChoice3] = useState("");
   const [choice4, setChoice4] = useState("");
   const [choice5, setChoice5] = useState("");
-  const [setting, setSetting] = useState("");
+  const userId = useUserStore((state) => state.userId);
+
   
 
   const itemAdd = () => {
     console.log(itemNum)
     const newItem = `Item ${itemNum.length + 1}`;
     setItemNum([...itemNum, newItem]);
-    
-  }
-
+  } 
+  
   async function handleChatSubmit(){
     try {
-    //   const response = axios.post("/recommends/request",{
-    //     "userId":"",
-    //     "setting":setting,
-    //     "choices":choices
-    //   })
-    //   console.log(response)
-      const data = {
-        "statusCode": 200,
-        "message": "성공적으로 추천받았습니다.",
-        "data": {
-              "choice": "추천 : 유튜브보기",
-            "reason": "추천 이유: 사용자는 지금 심심한 상태이며, 사회적 상호작용 선호도가 높아서 혼자 있는 것보다 다른 사람들과의 간접적인 상호작용을 선호할 가능성이 큽니다. 유튜브는 다양한 콘텐츠를 제공하여 즉각적으로 재미를 느낄 수 있으며, 동시에 다양한 주제의 비디오를 통해 새로운 정보나 트렌드를 쉽게 접할 수 있습니다. 또한 사용자는 시간 관리를 중요시하므로, 비교적 짧은 영상들을 선택하여 시간을 효율적으로 사용할 수 있습니다. 결정 스타일이 낮고 편안함을 덜 추구하며 리스크 감수 성향이 높다는 점에서 새로운 콘텐츠를 접하여 다양한 경험을 누려보는 것도 사용자의 성향에 부합합니다."
+      const response = axios.get("http://49.50.163.226:8080/recommends/request",{
+        // "userId":userId,
+        // "setting":setting,
+        // "choices":choices,
+        
+          "userId": 1,
+          "setting": "심심해",
+          "choices": ["게임(리그오브레전드)하기", "책읽기", "유튜브보기"],
+        
+      },{
+        headers:{
+          "Content-Type": "application/json"
         }
-    }
-      setAiResponse(data);
+      }
+      )
+      console.log(response)
+      // const data = JSON.stringify(response.data)
+      // setAiResponse(data);
       setIsResponse(true);
       console.log(isResponse);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       console.log(choices);
     }
   }

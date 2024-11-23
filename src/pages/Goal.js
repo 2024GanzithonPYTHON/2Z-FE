@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components';
 import Header from '../components/Header';
 import character_img from '../assets/character.png'
@@ -6,6 +6,7 @@ import TabBar from '../components/TabBar';
 import { Toggle } from '../components/ToggleButton';
 import GoalEl from '../components/GoalEl';
 import axios from '../api/baseURL';
+import useUserStore from '../store/user';
 
 const Goal = () => {
   const [isUpdate, setIsUpdate] = useState(false);
@@ -13,27 +14,52 @@ const Goal = () => {
   const [updatedGoalValue, setUpdatedGoalValue] = useState([]);
   const category = ["건강 / 식습관", "생활패턴 / 라이프스타일", "환경 보호", "자기 관리 / 개발목표", "시간 관리", "예산 / 재정 관리" , "관계 / 사회적", "취미 / 여가"]
   const [selectedIndex, setSelectedIndex] = useState(Array(31).fill(false))
+  const userId = useUserStore((state) => state.userId);
+  const [goalYN, setGoalYN] = useState(true)
+
 
 
   async function handleGoalSubmit(){
     try {
       setIsUpdate(false);
       const response = await axios.post('/goals/update',{
-        "userId":"",
+        "userId":userId,
         "goals": goalValue
       },{
         headers:{
-          Authorization:""
+          Authorization:"application/json"
         }
       })
       console.log(response)
-      const data = response
-      setUpdatedGoalValue(data)
+      // const data = response
+      // setUpdatedGoalValue(data)
     } catch (error) {
       console.log(error)
       console.log(updatedGoalValue);
     }
-  } 
+  }
+  
+  async function handleMyGoal(){
+    const response = await axios.get(`/goals/list/${userId}`)
+    console.log(response)
+    const data = response.data.goals
+    setUpdatedGoalValue(data)
+    return(response)
+    
+  }
+
+  useEffect(() => {
+    handleMyGoal()
+  }, [])
+
+  async function handleToggleClick(){
+    setGoalYN(prev => !prev)
+    const response = await axios.post('/goals/used',{
+      "userId":userId,
+      "goalYN":goalYN ? "Y" : "N"
+    })
+    console.log(response)
+  }
 
   return (
     <GoalBody>
@@ -63,18 +89,19 @@ const Goal = () => {
         <CharacterImg src={character_img}/>
       </IntroBody>
       <MyGoalBody>
-        <ToggleBody>
+        <ToggleBody onClick={handleToggleClick}>
           <Toggle/>
-        </ToggleBody>
+        </ToggleBody >
         <div style={{overflowY:"scroll", overflowX:"hidden", marginTop:"-130px", marginLeft:"20px"}}>
           {category.map((el, index) => {
+            
             return(
-            <GoalEl title={el} index={index} updatedGoalValue={["비건", "페스코", "독서 목표"]} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></GoalEl>
+            <GoalEl title={el} index={index} updatedGoalValue={updatedGoalValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></GoalEl>
             )
           })}
         </div>
       </MyGoalBody>
-      <UpdateButton onClick={() => setIsUpdate(true)}>수정하기</UpdateButton>
+      <UpdateButton onClick={() => {setIsUpdate(true)}}>수정하기</UpdateButton>
       </>
       }
       <TabBar/>

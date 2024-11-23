@@ -3,21 +3,24 @@ import { styled } from 'styled-components'
 import heart_icon from '../assets/heart_icon.png'
 import empty_heart from '../assets/empty_heart.png'
 import axios from '../api/baseURL'
+import useUserStore from '../store/user'
 
-const SpeechBubble = ({text, isHeart, setIsHeart, noHeart, setNoHeart}) => {
+const SpeechBubble = ({text, isHeart, setIsHeart, noHeart, setNoHeart, choices, setChoices, setting, setSetting, gptAnswer}) => {
+  const userId = useUserStore((state) => state.userId);
+
   
   async function handleHeartClick(){
     try {
-      // const response = axios.post("/hearts/save",{
-      //   "nickname":"",
-      //   "chat_id":"",
-      //   "answer":"",
-      //   "choices":[]
-      // },{
-      //   headers:{
+      const response = axios.post("/hearts",{
+        "nickname":userId,
+        "setting":setting,
+        "choice":choices,
+        "gptAnswer":[gptAnswer]
+      },{
+        headers:{
   
-      //   }
-      // })
+        }
+      })
       setIsHeart(prev => !prev)
     } catch (error) {
       console.log(error)

@@ -5,10 +5,16 @@ import Choice from '../components/Choice';
 import back_arrow from '../assets/arrow_back.png'
 import Header from '../components/Header';
 import TabBar from '../components/TabBar';
+import useUserStore from '../store/user';
 
 const Chat = () => {
   const [myChat, setMyChat] = useState("");
   const [isResponse, setIsResponse] = useState(false)
+  const userId = useUserStore((state) => state.userId);
+  const [choices, setChoices] = useState([]);
+  const [setting, setSetting] = useState("");
+  const [gptAnswer, setGptAnswer] = useState("");
+
   const [aiResponse, setAiResponse] = useState({
     "statusCode": 200,
     "message": "성공적으로 추천받았습니다.",
@@ -21,8 +27,8 @@ const Chat = () => {
   return (
     <ChatBody>
       <Header/>
-      <ChatContents myChat={myChat} setMyChat={setMyChat} aiResponse={aiResponse} setAiResponse={setAiResponse}></ChatContents>
-      <Choice myChat={myChat} setMyChat={setMyChat} aiResponse={aiResponse} setAiResponse={setAiResponse} isResponse={isResponse} setIsResponse={setIsResponse}/>
+      <ChatContents myChat={myChat} setMyChat={setMyChat} aiResponse={aiResponse} setAiResponse={setAiResponse} choices={choices} setChoices={setChoices} setting={setting} setSetting={setSetting} gptAnswer={gptAnswer}></ChatContents>
+      <Choice myChat={myChat} setMyChat={setMyChat} aiResponse={aiResponse} setAiResponse={setAiResponse} isResponse={isResponse} setIsResponse={setIsResponse} choices={choices} setChoices={setChoices} setting={setting} setSetting={setSetting} setGptAnswer={setGptAnswer}/>
       <TabBar/>
     </ChatBody>
   )

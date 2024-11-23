@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import character from '../assets/character.png';
 import SpeechBubble from './SpeechBubble';
 
-const ChatContents = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
+const ChatContents = ({myChat, setMyChat, aiResponse, setAiResponse, choices, setChoices, gptAnswer}) => {
   const [isHeart, setIsHeart] = useState(false);
   const [noHeart, setNoHeart] = useState(true);
   const [chatNum, setChatNum] = useState(0);
@@ -22,12 +22,12 @@ const ChatContents = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
         </BaraProfileContents>
         <p style={{fontWeight:'600', fontSize:'13px'}}>물어바라</p>
       </BaraProfile>
-      <SpeechBubble text={"안녕하세요 당신의 결정을 도울 물어바라입니다 만나서 반가워요!"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart}></SpeechBubble>
-      <SpeechBubble text={"채팅창에는 현재 상황이나 상태와 관련된 변수를, 네모 빈칸에는 고민되는 항목을 입력해주세요!"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart}/>
+      <SpeechBubble text={"안녕하세요 당신의 결정을 도울 물어바라입니다 만나서 반가워요!"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart} choices={choices} setChoices={setChoices}></SpeechBubble>
+      <SpeechBubble text={"채팅창에는 현재 상황이나 상태와 관련된 변수를, 네모 빈칸에는 고민되는 항목을 입력해주세요!"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart} choices={choices} setChoices={setChoices}/>
       {totalResponse ? 
       <>
-        <SpeechBubble text={totalResponse} isHeart={isHeart} setIsHeart={setIsHeart}></SpeechBubble>
-        <SpeechBubble text={"답변이 마음에 드시다면 하트를 눌러주세요"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart}></SpeechBubble>
+        <SpeechBubble text={totalResponse} isHeart={isHeart} setIsHeart={setIsHeart} choices={choices} setChoices={setChoices} gptAnswer={gptAnswer}></SpeechBubble>
+        <SpeechBubble text={"답변이 마음에 드시다면 하트를 눌러주세요"} isHeart={isHeart} setIsHeart={setIsHeart} noHeart={noHeart} setNoHeart={setNoHeart} choices={choices} setChoices={setChoices}></SpeechBubble>
         <div style={{marginBottom:"20px"}}></div>
       </>
       :
