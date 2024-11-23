@@ -12,6 +12,8 @@ const Goal = () => {
   const [goalValue, setGoalValue] = useState([]);
   const [updatedGoalValue, setUpdatedGoalValue] = useState([]);
   const category = ["건강 / 식습관", "생활패턴 / 라이프스타일", "환경 보호", "자기 관리 / 개발목표", "시간 관리", "예산 / 재정 관리" , "관계 / 사회적", "취미 / 여가"]
+  const [selectedIndex, setSelectedIndex] = useState(Array(31).fill(false))
+
 
   async function handleGoalSubmit(){
     try {
@@ -29,6 +31,7 @@ const Goal = () => {
       setUpdatedGoalValue(data)
     } catch (error) {
       console.log(error)
+      console.log(updatedGoalValue);
     }
   } 
 
@@ -46,7 +49,7 @@ const Goal = () => {
         <div style={{overflow:"scroll"}}>
           {category.map((el, index) => {
             return(
-            <GoalEl title={el} index={index}></GoalEl>
+            <GoalEl title={el} index={index} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} goalValue={goalValue} setGoalValue={setGoalValue}></GoalEl>
             )
           })}
         </div>
@@ -66,7 +69,7 @@ const Goal = () => {
         <div style={{overflowY:"scroll", overflowX:"hidden", marginTop:"-130px", marginLeft:"20px"}}>
           {category.map((el, index) => {
             return(
-            <GoalEl title={el} index={index} updatedGoalValue={["비건", "페스코", "독서 목표"]}></GoalEl>
+            <GoalEl title={el} index={index} updatedGoalValue={["비건", "페스코", "독서 목표"]} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}></GoalEl>
             )
           })}
         </div>

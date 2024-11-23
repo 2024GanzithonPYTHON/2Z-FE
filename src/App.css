@@ -8,11 +8,12 @@
   overflow: hidden;
   word-break: keep-all;
   position:relative;
+  background-color: #fff;
 }
 
 .app {
 width: 375px; /* 모바일 디바이스 너비 (예: iPhone 12) */
-height: 667px; /* 모바일 디바이스 높이 */
+height: 852px;  
 border: 1px solid #ddd; /* 디바이스 테두리처럼 보이게 */
  /* 디바이스의 둥근 모서리 효과 */
 overflow: hidden; /* 넘치는 내용을 숨김 */

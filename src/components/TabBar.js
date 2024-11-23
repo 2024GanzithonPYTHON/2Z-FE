@@ -14,7 +14,9 @@ const TabBar = () => {
       <Link to='/'>
         <img src={home} style={{width:"35px", height:"35px"}}/>
       </Link>
-      <img src={user} style={{width:"35px", height:"35px"}}/>
+      <Link to='/mypage'>
+        <img src={user} style={{width:"35px", height:"35px"}}/>
+      </Link>
     </TabBarBody>
   )
 }

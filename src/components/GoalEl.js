@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
-const GoalEl = ({ title, index, updatedGoalValue }) => {
+const GoalEl = ({ title, index, updatedGoalValue, selectedIndex, setSelectedIndex, goalValue, setGoalValue }) => {
   const [health, setHealth] = useState(["비건", "페스코", "저당식이", "고단백식이", "다이어트", "체중유지"]);
   const [lifeStyle, setLifeStyle] = useState(["야행성", "아침형 인간", "여행 지향", "주말 활동형"]);
   const [eco, setEco] = useState(["지속 가능성", "저탄소 생활", "제로 웨이스트", "친환경 제품"]);
@@ -11,7 +11,8 @@ const GoalEl = ({ title, index, updatedGoalValue }) => {
   const [social, setSocial] = useState(["가족 지향", "친구 지향", "네트워킹", "혼자 활동"]);
   const [spareTime, setSpareTime] = useState(["운동 취미", "예술 취미", "게임 선호", "음악 감상"]);
   const [selectedGoal, setSelectedGoal] = useState(false);
-
+  
+ 
   useEffect(() => {
     // updatedGoalValue가 변할 때마다 해당 값을 처리
     const updateCategory = (updatedGoalValue, category, setCategory) => {
@@ -49,26 +50,38 @@ const GoalEl = ({ title, index, updatedGoalValue }) => {
           break;
       }
     }
-  }, [updatedGoalValue, index]);  // updatedGoalValue나 index가 변할 때만 실행
+  }, [updatedGoalValue, index]);// updatedGoalValue나 index가 변할 때만 실행
+
+  const handleGoalClick = (index, el) => {
+    setSelectedIndex((prev) => {
+      const updated = [...prev]; // 기존 배열 복사
+      updated[index] = !prev[index];     // 특정 index 업데이트
+      return updated;            // 새로운 배열 반환
+    });
+    setGoalValue(prev=>[...prev, el]);
+    console.log(selectedIndex)
+    console.log(goalValue)
+  };
+  
 
   const render = (index) => {
     switch (index) {
       case 0:
-        return health.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue || selectedGoal ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return health.map((el, index) => <ElBody onClick={() => {handleGoalClick(index,el)}} key={el} style={{backgroundColor: selectedIndex[index] ? "rgba(247, 228, 143, .7)" : "#fff"}} >{el}</ElBody>);
       case 1:
-        return lifeStyle.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return lifeStyle.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+6,el)}} key={el} style={{backgroundColor: selectedIndex[index+6] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 2:
-        return eco.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return eco.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+10,el)}} key={el} style={{backgroundColor: selectedIndex[index+10] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 3:
-        return selfImprovment.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return selfImprovment.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+14,el)}} key={el} style={{backgroundColor: selectedIndex[index+14] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 4:
-        return timeSave.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return timeSave.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+17,el)}} key={el} style={{backgroundColor: selectedIndex[index+17] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 5:
-        return moneySave.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return moneySave.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+20,el)}} key={el} style={{backgroundColor: selectedIndex[index+20] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 6:
-        return social.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return social.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+23,el)}} key={el} style={{backgroundColor: selectedIndex[index+23] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       case 7:
-        return spareTime.map((el) => <ElBody key={el} style={{backgroundColor: updatedGoalValue ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
+        return spareTime.map((el, index) => <ElBody onClick={() => {handleGoalClick(index+27,el)}} key={el} style={{backgroundColor: selectedIndex[index+27] ? "rgba(247, 228, 143, .7)" : "#fff"}}>{el}</ElBody>);
       default:
         break;
     }
@@ -117,3 +130,4 @@ const ElBody = styled.div`
     background-color: rgba(247, 228, 143, 0.7);
   }
 `;
+

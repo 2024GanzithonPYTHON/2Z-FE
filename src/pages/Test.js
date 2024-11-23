@@ -32,7 +32,7 @@ const Test = () => {
       })
       console.log(response)
     } catch (error) {
-      console.log(error)
+      console.log(testResult)
       
     }
   }
@@ -54,7 +54,7 @@ const Test = () => {
       next ? 
       <>
         {title_2.map((el, index) => {
-          return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index+4} setTestResult={setTestResult} testResult={testResult}></TestContents>)
+          return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index+4} setTestResult={setTestResult} testResult={testResult} next={next}></TestContents>)
         })}
         <Link to="/">
           <TestButton onClick={handleSubmit}>제출하기</TestButton>
@@ -67,7 +67,7 @@ const Test = () => {
         // setTestResult((prev) => prev[index] = testValue)
         console.log(testValue);
 
-        return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index} setTestResult={setTestResult} testResult={testResult}></TestContents>)
+        return(<TestContents title={el} testValue={testValue} setTestValue = {setTestValue} index={index} setTestResult={setTestResult} testResult={testResult} next={next}></TestContents>)
       })}
       <TestNextButton onClick={() => {setNext(true)}}>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />

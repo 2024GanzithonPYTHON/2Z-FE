@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components';
 
-const TestContents = ({title, testValue, setTestValue, index, setTestResult, testResult}) => {
+const TestContents = ({title, testValue, setTestValue, index, setTestResult, testResult, next}) => {
   const [selectedButton, setSelectedButton] = useState(0);
 
   const handleClick = (index, value) => {
@@ -10,12 +10,28 @@ const TestContents = ({title, testValue, setTestValue, index, setTestResult, tes
     const title = title_list[index]
     console.log(value);
 
-    setTestResult((prevResult) => ({
-      ...prevResult,
-      [title]: value,// 선택된 항목 업데이트
-    }));
+    // setTestResult((prevResult) => ({
+    //   ...prevResult,
+    //   [title]: value,// 선택된 항목 업데이트
+    // }));
+    setTestResult((prevResult) => {
+      const desiredOrder = ["extroversion", "decision", "risk", "comfort", "time", "social", "budget"];
+      const sortedResult = Object.keys(prevResult)
+        .sort((a, b) => desiredOrder.indexOf(a) - desiredOrder.indexOf(b))
+        .reduce((acc, key) => {
+          acc[key] = prevResult[key];
+          return acc;
+        }, {});
+      return sortedResult;
+    });
+    
     setSelectedButton(value)
   };
+
+  useEffect(() => {
+    setSelectedButton(0)
+  }, [next])
+  
 
   return (
     <TestContentsBody>

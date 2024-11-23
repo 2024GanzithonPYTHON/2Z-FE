@@ -4,20 +4,20 @@ import heart_icon from '../assets/heart_icon.png'
 import empty_heart from '../assets/empty_heart.png'
 import axios from '../api/baseURL'
 
-const SpeechBubble = ({text, isHeart, setIsHeart}) => {
+const SpeechBubble = ({text, isHeart, setIsHeart, noHeart, setNoHeart}) => {
   
   async function handleHeartClick(){
     try {
-      const response = axios.post("/hearts/save",{
-        "nickname":"",
-        "chat_id":"",
-        "answer":"",
-        "choices":[]
-      },{
-        headers:{
+      // const response = axios.post("/hearts/save",{
+      //   "nickname":"",
+      //   "chat_id":"",
+      //   "answer":"",
+      //   "choices":[]
+      // },{
+      //   headers:{
   
-        }
-      })
+      //   }
+      // })
       setIsHeart(prev => !prev)
     } catch (error) {
       console.log(error)
@@ -28,7 +28,11 @@ const SpeechBubble = ({text, isHeart, setIsHeart}) => {
   return (
     <>
       <SpeechBubbleContents>{text}
-      {isHeart ? <HeartIcon src={heart_icon} onClick={handleHeartClick}/> : <><EmptyHeartIcon src={empty_heart} onClick={handleHeartClick}/></>}
+      {noHeart ?
+      <></>
+      :
+      isHeart ? <HeartIcon src={heart_icon} onClick={handleHeartClick}/> : <><EmptyHeartIcon src={empty_heart} onClick={handleHeartClick}/></>}
+      
       </SpeechBubbleContents>
       
     </>

@@ -2,7 +2,7 @@ import axios from '../api/baseURL';
 import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
-const Choice = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
+const Choice = ({myChat, setMyChat, aiResponse, setAiResponse, isResponse,setIsResponse}) => {
   const [itemNum, setItemNum] = useState([]);
   const [bottomStyle, setBottomStyle] = useState("-130px")
   const [choices, setChoices] = useState([]);
@@ -23,14 +23,23 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
 
   async function handleChatSubmit(){
     try {
-      const response = axios.post("/recommends/request",{
-        "userId":"",
-        "setting":setting,
-        "choices":choices
-      })
-      console.log(response)
-      const data = response
+    //   const response = axios.post("/recommends/request",{
+    //     "userId":"",
+    //     "setting":setting,
+    //     "choices":choices
+    //   })
+    //   console.log(response)
+      const data = {
+        "statusCode": 200,
+        "message": "성공적으로 추천받았습니다.",
+        "data": {
+              "choice": "추천 : 유튜브보기",
+            "reason": "추천 이유: 사용자는 지금 심심한 상태이며, 사회적 상호작용 선호도가 높아서 혼자 있는 것보다 다른 사람들과의 간접적인 상호작용을 선호할 가능성이 큽니다. 유튜브는 다양한 콘텐츠를 제공하여 즉각적으로 재미를 느낄 수 있으며, 동시에 다양한 주제의 비디오를 통해 새로운 정보나 트렌드를 쉽게 접할 수 있습니다. 또한 사용자는 시간 관리를 중요시하므로, 비교적 짧은 영상들을 선택하여 시간을 효율적으로 사용할 수 있습니다. 결정 스타일이 낮고 편안함을 덜 추구하며 리스크 감수 성향이 높다는 점에서 새로운 콘텐츠를 접하여 다양한 경험을 누려보는 것도 사용자의 성향에 부합합니다."
+        }
+    }
       setAiResponse(data);
+      setIsResponse(true);
+      console.log(isResponse);
     } catch (error) {
       // console.log(error);
       console.log(choices);
@@ -61,6 +70,7 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
 
   const handleBlur = (choice) => {
     setChoices(prev => [...prev, choice])
+    console.log(choice)
   }
 
   const handleSettingChange = (e) => {
@@ -72,8 +82,15 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
   
 
   return (
+    <>
+    {isResponse ? 
+      <div style={{display:'flex', flexDirection:'column', position:"relative", bottom:"-90px"}}>
+      <RetryButton>다른 답변보기</RetryButton>
+      <NewChoiceButton>새로운 선택</NewChoiceButton>
+      </div>
+    :
     <ChoiceBody>
-      <ItemChoiceBody style={{bottom:{bottomStyle}}}>
+      <><ItemChoiceBody style={{bottom:{bottomStyle}}}>
         <ItemContents value={choice1} onChange={(e) => {handleChoiceChange(e, setChoice1)}} onBlur={() => handleBlur(choice1)}></ItemContents>
         <VsText>VS</VsText>
         <ItemContents value={choice2} onChange={(e) => {handleChoiceChange(e, setChoice2)}} onBlur={() => handleBlur(choice2)}></ItemContents>
@@ -98,7 +115,11 @@ const Choice = ({myChat, setMyChat, aiResponse, setAiResponse}) => {
           </span>
         </OptionButton>
       </OptionBody>
-    </ChoiceBody>
+      </>
+      
+      
+    </ChoiceBody>}
+    </>
   )
 }
 
@@ -192,4 +213,25 @@ const OptionButton = styled.button`
   border:none;
   color:#fff;
   background:#CCB39D;
+`
+
+const RetryButton = styled.button`
+  margin-bottom:15px;
+  border:none;
+  border-radius:15px;
+  padding:10px;
+  width:150px;
+  font-weight:700;
+  font-size:16px;
+  background:#FBE1CF;
+`
+
+const NewChoiceButton = styled.button`
+  border:none;
+  border-radius:15px;
+  padding:10px;
+  width:150px;
+  font-weight:700;
+  font-size:16px;
+  background:#FBE1CF;
 `
