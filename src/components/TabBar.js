@@ -3,14 +3,20 @@ import { styled } from 'styled-components'
 import home from '../assets/home-2.png'
 import note_2 from '../assets/note.png'
 import user from '../assets/user.png'
+import { Link } from 'react-router-dom'
 
 const TabBar = () => {
   return (
     <TabBarBody>
-      <img src={home} style={{width:"40px", height:"40px"}}/>
-      {/* <img src={note} style={{width:"20px"}}/> */}
-      <img src={note_2} style={{width:'40px', height:"40px"}}/>
-      <img src={user} style={{width:"40px", height:"40px"}}/>
+      <Link to='/goal'>
+        <img src={note_2} style={{width:'35px', height:"35px"}}/>
+      </Link>
+      <Link to='/'>
+        <img src={home} style={{width:"35px", height:"35px"}}/>
+      </Link>
+      <Link to='/mypage'>
+        <img src={user} style={{width:"35px", height:"35px"}}/>
+      </Link>
     </TabBarBody>
   )
 }
@@ -18,14 +24,16 @@ const TabBar = () => {
 export default TabBar
 
 const TabBarBody = styled.div`
-  width:360px;
+  width:393px;
   height:60px;
-  position:absolute;
-  background:white;
+  position:fixed;
+  background:#fff;
   bottom:0;
   display:flex;
-  gap:90px;
+  gap:95px;
   justify-content:center;
   align-items:center;
-  margin-bottom:20px;
+  // margin-bottom:20px;
+  padding:20px 0;
+  box-sizing:border-box;
 `
