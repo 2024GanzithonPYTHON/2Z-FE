@@ -2,14 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/StartScreen.css";
 import logo from "../assets/logo.png";
+import title from "../assets/title.png";
 
 function StartScreen() {
   return (
     <div className="start-screen">
       <div className="welcome-container">
         <img src={logo} alt="Animal" className="welcome-image" />
-        <h1>물어바라에 오신 것을</h1>
-        <h1>환영합니다</h1>
+        <img src={title} alt="Title" className="title-image" />
+        {/* <h2>환영합니다 </h2> */}
+        {/* <h2>물어바라 입니다</h2> */}
         <p>결정을 대신 해드릴게요! 모든 물어보세요!</p>
       </div>
       <div className="button-container">
