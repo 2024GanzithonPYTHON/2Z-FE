@@ -15,7 +15,7 @@ function LoginScreen() {
     setError(null); // 에러 초기화
 
     try {
-      const response = await axios.post("https://localhost:8080/users/login", {
+      const response = await axios.post("http://localhost:8080/users/login", {
         email,
         password,
       }, {

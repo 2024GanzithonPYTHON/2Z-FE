@@ -21,12 +21,16 @@ function SignUpScreen() {
       return;
     }
 
+    const requestData = {
+      email,
+      password,
+      nickname,
+    };
+  
+    console.log("전송할 JSON 데이터:", JSON.stringify(requestData)); // JSON 형식 출력
+  
     try {
-      const response = await axios.post("https://localhost:8080/users/join", {
-        email,
-        nickname,
-        password,
-      }, {
+      const response = await axios.post("http://localhost:8080/users/join", requestData, {
         headers: {
           "Content-Type": "application/json",
         },
