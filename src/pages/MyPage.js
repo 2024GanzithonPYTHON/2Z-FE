@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../styles/MyPage.css";
 import axios from "axios";
 import mypageimg from "../assets/mypage.png";
@@ -8,6 +8,43 @@ function MyPage() {
     const chatId = 12345; // 예시 채팅 ID
     const answer = "추천 음식은 초코라떼입니다."; // 예시 AI 답변
     const choices = ["딸기라떼", "초코라떼"]; // 예시 선택지
+    const [slides, setSlides] = useState([]); // 슬라이드 데이터 상태
+    const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 인덱스
+    const [loading, setLoading] = useState(true); // 로딩 상태
+    const [error, setError] = useState(null); // 에러 상태
+
+    useEffect(() => {
+      // 데이터 가져오기
+      const fetchSlides = async () => {
+        try {
+          const response = await axios.get("https://your-api-url.com/slides");
+          setSlides(response.data); // 받아온 데이터를 슬라이드 상태로 설정
+          setLoading(false); // 로딩 완료
+        } catch (err) {
+          setError("데이터를 가져오는 데 실패했습니다.");
+          setLoading(false);
+        }
+      };
+  
+      fetchSlides();
+    }, []);
+  
+    const handlePrevSlide = () => {
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
+    };
+  
+    const handleNextSlide = () => {
+      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+    };
+  
+    if (loading) {
+      return <div className="loading">로딩 중...</div>; // 로딩 중 메시지
+    }
+  
+    if (error) {
+      return <div className="error-message">{error}</div>; // 에러 메시지
+    }
+
   
     // 하트 보관함에 저장하는 함수
     const saveToHeart = async () => {
@@ -62,21 +99,29 @@ function MyPage() {
       {/* 보관함 섹션 */}
       <div className="favorites-section">
         <h3 className="favorites-title">❤️ 보관함</h3>
-        <div className="favorites-item">
-          <h4 className="item-title">딸기라떼 vs 초코라떼</h4>
-          <p className="item-description">
-            비오는 날 딸기와 초코의 조화는 환상적입니다. <br />
-            설렘을 원하는 분께 강력히 추천합니다. <br />
-            초코라떼는 안정감을 줄 수 있는 선택입니다.
-          </p>
-          {/* 페이지 표시용 점 */}
+        <div className="slider">
+          <button className="slider-button prev" onClick={handlePrevSlide}>
+            {"<"}
+          </button>
+          <div className="slider-content">
+            <h4 className="item-title">{slides[currentIndex].title}</h4>
+            <p className="item-description">{slides[currentIndex].description}</p>
+          </div>
+          <button className="slider-button next" onClick={handleNextSlide}>
+            {">"}
+          </button>
+        </div>
+
+        {/* 페이지 표시용 점 */}
         <div className="pagination-dots">
-          <span className="dot active"></span>
-          <span className="dot"></span>
-          <span className="dot"></span>
+          {slides.map((_, index) => (
+            <span
+              key={index}
+              className={`dot ${index === currentIndex ? "active" : ""}`}
+              onClick={() => setCurrentIndex(index)}
+            ></span>
+          ))}
         </div>
-        </div>
-        
       </div>
     </div>
   );
