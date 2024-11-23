@@ -17,13 +17,14 @@ body {
 
   
   .welcome-container {
-    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 50vh;
   }
   
-  .welcome-image {
+  .welcome-image, .title-image {
     width: 150px;
     height: auto;
-    margin-bottom: 20px;
   }
   
   .button-container {
