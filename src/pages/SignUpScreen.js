@@ -59,10 +59,17 @@ function SignUpScreen() {
                value={email}
                onChange={(e) => setEmail(e.target.value)} 
         />
+        <input
+          type="text"
+          placeholder="닉네임"
+          className="input-field"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
         <input type="password" 
                placeholder="비밀번호" 
                className="input-field"
-               value={nickname}
+               value={password}
                onChange={(e) => setNickname(e.target.value)}
         />
         <input type="password" 
