@@ -22,7 +22,7 @@ function SignUpScreen() {
     }
 
     try {
-      const response = await axios.post("https://your-api-url.com/users/join", {
+      const response = await axios.post("https://localhost:8080/users/join", {
         email,
         nickname,
         password,
