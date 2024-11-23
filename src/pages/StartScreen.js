@@ -18,6 +18,7 @@ function StartScreen() {
         <Link to="/login" className="button login-button">로그인</Link>
         <Link to="/signup" className="button signup-button">회원가입</Link>
         
+//         <Link to="/mypage" className="button signup-button">마이페이지</Link>
       </div>
     </div>
   );

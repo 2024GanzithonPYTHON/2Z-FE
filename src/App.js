@@ -17,8 +17,6 @@ import { Helmet } from 'react-helmet';
 import Main from './pages/Main';
 import Goal from './pages/Goal';
 
-
-
 function App() {
   
 

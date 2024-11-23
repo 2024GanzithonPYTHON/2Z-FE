@@ -32,7 +32,7 @@ function LoginScreen() {
       setUserId(userId)
       console.log(response.data)
       navigate("/main"); // 성공 시 대시보드로 이동
-      
+ 
     } catch (err) {
       const errorMessage = err.response?.data?.message || "로그인 실패";
       setError(errorMessage); // 에러 상태 업데이트
@@ -54,6 +54,7 @@ function LoginScreen() {
                className="input-field" 
                value={email} 
               onChange={(e) => {setEmail(e.target.value); console.log(e.target.value)}} 
+
          />
         <input type="password" 
                placeholder="비밀번호" 
