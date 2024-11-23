@@ -70,7 +70,7 @@ function SignUpScreen() {
                placeholder="비밀번호" 
                className="input-field"
                value={password}
-               onChange={(e) => setNickname(e.target.value)}
+               onChange={(e) => setPassword(e.target.value)}
         />
         <input type="password" 
                placeholder="비밀번호 확인" 
